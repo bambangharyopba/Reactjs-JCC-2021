@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Slabo", sans-serif;
+}
+
+section {
+  margin: 20px 40px;
+}
+
+.content {
+  margin: 0 0 20px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  padding: 32px 48px;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 28px;
+}
+
+#back-btn {
+  color: black;
+  font-size: 0.8em;
+  text-decoration: none;
+  background-color: #eeeeee;
+  border: 1px solid #dedede;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+#back-btn:hover {
+  background-color: #cecece;
+}
+
+.form-field {
+  display: flex;
+  margin: 10px 0;
+}
+
+.form-label {
+  float: left;
+  width: 25%;
+}
+.form-input {
+  width: 75%;
+  padding: 2px;
+}
+
+@media screen and (max-width: 480px) {
+  .form-field {
+    display: block;
+  }
+  .form-label {
+    width: 100%;
+  }
+  .form-input {
+    width: 100%;
+    padding: 2px;
+  }
+}
+
+#submit-btn {
+  padding: 2px 8px;
+}

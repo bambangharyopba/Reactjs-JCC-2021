@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link href="public/css/contact-style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <section>
+      <div class="content">
+        <h1>Hubungi Kami</h1>
+        <p><b>Kantor:</b> di jalan belum jadi</p>
+        <p><b>Nomor Telepon:</b> 08XX-XXXX-XXXX</p>
+        <p><b>Email:</b> email@contoh.com</p>
+        <h1>Kirimkan Pesan</h1>
+        <form method="POST">
+          <div class="form-field">
+            <label for="nama" class="form-label"><b>Nama</b></label>
+            <input type="text" class="form-input" name="nama"/><br>
+          </div>
+          
+          <div class="form-field">
+            <label for="email" class="form-label"><b>Email</b></label>
+            <input type="text" class="form-input" name="email"/><br>
+          </div>
+
+          <div class="form-field">
+            <label for="jenis-kelamin" class="form-label"><b>Jenis Kelamin</b></label>
+            <div class="radio-options">
+              <input type="radio" id="laki-laki" name="jenis-kelamin" value="laki-laki"/>
+              <label for="laki-laki">Laki-laki</label><br>
+              <input type="radio" id="perempuan" name="jenis-kelamin" value="perempuan"/>
+              <label for="perempuan">Perempuan</label><br>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="pesan" class="form-label"><b>Pesan Anda</b></label>
+            <textarea rows="6" class="form-input" name="pesan"></textarea><br>
+          </div>
+
+          <input id="submit-btn" type="submit"/> 
+        </form>
+      </div>
+      <a id="back-btn" href="index.html">Kembali ke Index</a>
+    </section>
+  </body>
+</html>
