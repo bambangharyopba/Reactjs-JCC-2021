@@ -1,0 +1,9 @@
+.list {
+  border-top: 2px solid lightgrey;
+}
+
+.litems {
+  /* border-top: 1px solid lightgrey; */
+  border-bottom: 1px solid lightgrey;
+  padding: 8px 0;
+}
