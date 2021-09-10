@@ -1,30 +1,19 @@
 * {
   margin: 0;
   padding: 0;
-
 }
 
-.wrapper {
+.App {
   padding: 0 30%;
   margin: 120px 0;
-  display: flex;
+  display: grid;
   justify-content: center;
 }
 
-@media screen and (max-width: 480px){
-  .wrapper {
+@media screen and (max-width: 480px) {
+  .App {
     padding: 0px 0px;
     width: 100%;
     min-width: 0px;
   }
-}
-
-.card-title {
-  font-size: 2em;
-  font-weight: normal;
-  color: grey
-}
-
-.img-container {
-  text-align: center;
 }
