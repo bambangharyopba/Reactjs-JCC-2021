@@ -1,0 +1,16 @@
+.tugas-13-wrapper {
+  padding: 0 240px;
+  margin: 100px 0 0;
+  display: grid;
+  transition: padding 250ms ease;
+}
+
+.tugas-13-wrapper > * {
+  margin: 20px 0px;
+}
+
+@media screen and (max-width: 720px) {
+  .tugas-13-wrapper {
+    padding: 0px 0px;
+  }
+}
