@@ -1,0 +1,41 @@
+.bTable .bTable-title {
+  text-align: center;
+}
+
+.bTable h1 {
+  padding: 0 0 10px;
+}
+
+.bTable table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.bTable th {
+  background-color: royalblue;
+  color: white;
+  padding: 10px 0px;
+}
+
+.bTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.bTable tr:nth-child(odd) {
+  background-color: white;
+}
+
+.bTable td {
+  padding: 6px 0px;
+  text-align: center;
+}
+
+.bTable button {
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  border-color: antiquewhite;
+}
