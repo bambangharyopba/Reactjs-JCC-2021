@@ -3,17 +3,6 @@
   padding: 0;
 }
 
-.wrapper {
-  padding: 0 30%;
-  margin: 120px 0;
+.App {
   display: grid;
-  justify-content: center;
-}
-
-@media screen and (max-width: 480px) {
-  .wrapper {
-    padding: 0px 0px;
-    width: 100%;
-    min-width: 0px;
-  }
 }

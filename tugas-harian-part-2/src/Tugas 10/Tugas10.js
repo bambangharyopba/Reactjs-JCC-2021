@@ -34,14 +34,16 @@ function Tugas10() {
   }, [counter]);
 
   return show ? (
-    <div className="clock">
-      <h2>
-        Now At - {hour > 12 ? hour - 12 : hour}:
-        {minute < 10 ? `0${minute}` : minute}:
-        {second < 10 ? `0${second}` : second}
-        {hour >= 12 ? " PM" : " AM"}
-      </h2>
-      <p>Countdown: {counter}</p>
+    <div className="tugas-10-wrapper">
+      <div className="clock">
+        <h2>
+          Now At - {hour > 12 ? hour - 12 : hour}:
+          {minute < 10 ? `0${minute}` : minute}:
+          {second < 10 ? `0${second}` : second}
+          {hour >= 12 ? " PM" : " AM"}
+        </h2>
+        <p>Countdown: {counter}</p>
+      </div>
     </div>
   ) : (
     <></>

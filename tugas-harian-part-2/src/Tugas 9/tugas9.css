@@ -96,3 +96,18 @@
 .button:hover {
   cursor: pointer;
 }
+
+.tugas-9-wrapper {
+  padding: 0 30%;
+  margin: 120px 0;
+  display: grid;
+  justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
+  .tugas-9-wrapper {
+    padding: 0px 0px;
+    width: 100%;
+    min-width: 0px;
+  }
+}

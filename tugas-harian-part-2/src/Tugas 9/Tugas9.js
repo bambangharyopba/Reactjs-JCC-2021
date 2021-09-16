@@ -79,15 +79,17 @@ function Tugas9() {
   ];
 
   return (
-    <Card className="card">
-      <div className="img-container">
-        <img src={logo} alt="logo" className="App-logo" />
-      </div>
-      <h2 className="card-title">THINGS TO DO</h2>
-      <p className="card-paragraph">During Bootcamp in Jabarcodingcamp</p>
-      <List items={items} />
-      <Button label="Send" />
-    </Card>
+    <div className="tugas-9-wrapper">
+      <Card className="card">
+        <div className="img-container">
+          <img src={logo} alt="logo" className="App-logo" />
+        </div>
+        <h2 className="card-title">THINGS TO DO</h2>
+        <p className="card-paragraph">During Bootcamp in Jabarcodingcamp</p>
+        <List items={items} />
+        <Button label="Send" />
+      </Card>
+    </div>
   );
 }
 
