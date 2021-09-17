@@ -10,12 +10,15 @@ import Tugas10 from "./Tugas 10/Tugas10";
 import Tugas11 from "./Tugas-11/Tugas11";
 import Tugas12 from "./Tugas-12/Tugas12";
 import Tugas13 from "./Tugas-13/Tugas13";
-import { MahasiswaProvider } from "./Tugas-13/MahasiswaContext";
-import { MahasiswaProvider2 } from "./Tugas-14/MahasiswaContext2";
 import Tugas14Table from "./Tugas-14/Tugas14Table";
 import Tugas14Form from "./Tugas-14/Tugas14Form";
-import Navbar from "./Tugas-14/Navbar";
+import Tugas15Table from "./Tugas-15/Tugas15Table";
+import Tugas15Form from "./Tugas-15/Tugas15Form";
+import Navbar from "./Tugas-15/Navbar";
+import { MahasiswaProvider } from "./Tugas-13/MahasiswaContext";
+import { MahasiswaProvider2 } from "./Tugas-14/MahasiswaContext2";
 import { ThemeProvider } from "./Tugas-14/ThemeContext";
+import "antd/dist/antd.css";
 
 function App() {
   return (
@@ -48,6 +51,12 @@ function App() {
               </Route>
               <Route exact path="/Tugas14/form">
                 <Tugas14Form />
+              </Route>
+              <Route exact path="/Tugas15">
+                <Tugas15Table />
+              </Route>
+              <Route exact path="/Tugas15/form">
+                <Tugas15Form />
               </Route>
             </MahasiswaProvider2>
           </Switch>
