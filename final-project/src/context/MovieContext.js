@@ -6,7 +6,7 @@ export const MovieContext = createContext();
 export function MovieProvider(props) {
   let [data, setData] = useState();
 
-  useEffect(() => {
+  const fetchData = () => {
     MovieAPI.GetMovies()
       .then((res) => {
         setData(res);
@@ -14,10 +14,18 @@ export function MovieProvider(props) {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
+    let rtfetch = setInterval(fetchData, 5000);
+    return () => {
+      clearInterval(rtfetch);
+    };
   }, []);
 
   return (
-    <MovieContext.Provider value={{ movieList: data }}>
+    <MovieContext.Provider value={{ movieList: data, fetchData: fetchData }}>
       {props.children}
     </MovieContext.Provider>
   );

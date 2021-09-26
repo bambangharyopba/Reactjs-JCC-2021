@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoginLayout from "../layouts/LoginLayout";
 import {
   Card,
@@ -13,13 +13,17 @@ import {
 import { useHistory } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import MovieAPI from "../api/MovieAPI";
+import { MovieContext } from "../context";
 
 function PageContent() {
   const history = useHistory();
+  let { fetchData } = useContext(MovieContext);
+
   const onFinish = (addData) => {
     console.log(addData);
     MovieAPI.AddMovie(addData)
       .then((res) => {
+        fetchData();
         message.success("Movie berhasil ditambahkan");
         history.push("/movies-table");
       })

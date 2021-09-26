@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LoginLayout from "../layouts/LoginLayout";
 import { Card, Form, Input, Button, Row, Col, InputNumber } from "antd";
 import { useHistory, useParams } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import MovieAPI from "../api/MovieAPI";
+import { MovieContext } from "../context";
 
 function PageContent() {
   const history = useHistory();
   const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState();
+  let { fetchData } = useContext(MovieContext);
 
   useEffect(() => {
     MovieAPI.GetMovie(id)
@@ -20,6 +22,7 @@ function PageContent() {
   const onFinish = (editData) => {
     MovieAPI.EditMovie(id, editData)
       .then((res) => {
+        fetchData();
         history.push("/movies-table");
       })
       .catch((error) => console.log(error));

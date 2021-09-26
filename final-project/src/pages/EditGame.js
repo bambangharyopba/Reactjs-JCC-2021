@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LoginLayout from "../layouts/LoginLayout";
 import {
   Card,
@@ -13,12 +13,14 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import GameAPI from "../api/GameAPI";
+import { GameContext } from "../context";
 
 function PageContent() {
   const history = useHistory();
   const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState();
+  let { fetchData } = useContext(GameContext);
 
   useEffect(() => {
     GameAPI.GetGame(id)
@@ -27,9 +29,9 @@ function PageContent() {
   }, [id]);
 
   const onFinish = (editData) => {
-    console.log(editData);
     GameAPI.EditGame(id, editData)
       .then((res) => {
+        fetchData();
         history.push("/games-table");
       })
       .catch((error) => console.log(error));

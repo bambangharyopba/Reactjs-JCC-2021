@@ -18,7 +18,7 @@ import GameAPI from "../api/GameAPI";
 
 function PageContent() {
   const history = useHistory();
-  let { gameList } = useContext(GameContext);
+  let { gameList, fetchData } = useContext(GameContext);
   let [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -52,7 +52,9 @@ function PageContent() {
     history.push(`/games/edit/${id}`);
   };
   const handleDelete = (id) => {
-    GameAPI.DeleteGame(id);
+    GameAPI.DeleteGame(id).then(() => {
+      fetchData();
+    });
   };
 
   const getDataSource = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoginLayout from "../layouts/LoginLayout";
 import {
   Card,
@@ -14,14 +14,17 @@ import {
 import { useHistory } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import GameAPI from "../api/GameAPI";
+import { GameContext } from "../context";
 
 function PageContent() {
   const history = useHistory();
+  const { fetchData } = useContext(GameContext);
 
   const onFinish = (addData) => {
     console.log(addData);
     GameAPI.AddGame(addData)
       .then((res) => {
+        fetchData();
         message.success("Game berhasil ditambahkan");
         history.push("/games-table");
       })

@@ -43,10 +43,10 @@ function PageContent() {
           <Col>Release: {data.release}</Col>
         </Row>
         <Row>
-          <Col>Single Player: {data.singlePlayer === "1" ? "Yes" : "No"}</Col>
+          <Col>Single Player: {data.singlePlayer === 1 ? "Yes" : "No"}</Col>
         </Row>
         <Row>
-          <Col>Multiplayer: {data.multiplayer === "1" ? "Yes" : "No"}</Col>
+          <Col>Multiplayer: {data.multiplayer === 1 ? "Yes" : "No"}</Col>
         </Row>
       </Col>
     </Row>

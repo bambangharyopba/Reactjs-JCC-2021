@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Layout, Row, Col, Menu, Typography } from "antd";
-import logo from "../logo.svg";
 import { UserContext } from "../context";
 
 const { Header } = Layout;
@@ -14,9 +13,12 @@ function HeaderNav() {
       <Row justify="space-between">
         <Col>
           <Menu
-            style={{ display: "inline-block" }}
+            style={{
+              display: "inline-block",
+              border: 0,
+              backgroundColor: "#2e2e2e",
+            }}
             mode="horizontal"
-            style={{ border: 0, backgroundColor: "#2e2e2e" }}
           >
             <Menu.Item key="nav-home">
               <NavLink

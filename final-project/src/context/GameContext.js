@@ -6,7 +6,7 @@ export const GameContext = createContext();
 export function GameProvider(props) {
   let [data, setData] = useState();
 
-  useEffect(() => {
+  const fetchData = () => {
     GameAPI.GetGames()
       .then((res) => {
         setData(res);
@@ -14,10 +14,18 @@ export function GameProvider(props) {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
+    let rtfetch = setInterval(fetchData, 5000);
+    return () => {
+      clearInterval(rtfetch);
+    };
   }, []);
 
   return (
-    <GameContext.Provider value={{ gameList: data }}>
+    <GameContext.Provider value={{ gameList: data, fetchData: fetchData }}>
       {props.children}
     </GameContext.Provider>
   );

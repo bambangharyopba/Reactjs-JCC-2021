@@ -18,7 +18,7 @@ import MovieAPI from "../api/MovieAPI";
 
 function PageContent() {
   const history = useHistory();
-  let { movieList } = useContext(MovieContext);
+  let { movieList, fetchData } = useContext(MovieContext);
   let [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -63,12 +63,12 @@ function PageContent() {
   };
 
   const handleEdit = (id) => {
-    console.log("edit", id);
     history.push(`/movies/edit/${id}`);
   };
   const handleDelete = (id) => {
-    console.log("delete", id);
-    MovieAPI.DeleteMovie(id);
+    MovieAPI.DeleteMovie(id).then(() => {
+      fetchData();
+    });
   };
 
   const getDataSource = () => {
