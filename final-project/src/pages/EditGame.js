@@ -41,7 +41,7 @@ function PageContent() {
 
   return (
     loaded && (
-      <Row>
+      <Row justify="center" style={{ margin: "20px 0px 0px" }}>
         <Col span={10}>
           <Card style={{ padding: "20px 0px 0px" }}>
             <Form
@@ -100,7 +100,6 @@ function PageContent() {
                 label="Single Player"
                 name="singlePlayer"
                 valuePropName="checked"
-                initialValue={false}
                 rules={[]}
               >
                 <Checkbox />
@@ -109,7 +108,6 @@ function PageContent() {
                 label="Multi Player"
                 name="multiplayer"
                 valuePropName="checked"
-                initialValue={false}
                 rules={[]}
               >
                 <Checkbox />

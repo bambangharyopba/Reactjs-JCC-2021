@@ -32,7 +32,7 @@ function PageContent() {
 
   return (
     loaded && (
-      <Row>
+      <Row justify="center" style={{ margin: "20px 0px 0px" }}>
         <Col span={10}>
           <Card style={{ padding: "20px 0px 0px" }}>
             <Form
