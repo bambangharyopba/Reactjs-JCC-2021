@@ -20,10 +20,10 @@ function PageContent() {
   const history = useHistory();
   let { gameList, fetchData } = useContext(GameContext);
   let [games, setGames] = useState([]);
-
-  useEffect(() => {
-    if (gameList) setGames(gameList);
-  }, [gameList]);
+  let [filterStatus, setFilterStatus] = useState(false);
+  let [filterConfig, setFilterConfig] = useState({});
+  let [searchStatus, setSearchStatus] = useState(false);
+  let [searchInput, setSearchInput] = useState();
 
   const gameAttrb = [
     "number",
@@ -47,6 +47,12 @@ function PageContent() {
     "Single Player",
     "Action",
   ];
+  const sorter = {
+    No: (a, b) => a.number - b.number,
+    Cover: false,
+    Name: (a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0),
+    Release: (a, b) => a.release - b.release,
+  };
 
   const handleEdit = (id) => {
     history.push(`/games/edit/${id}`);
@@ -80,9 +86,16 @@ function PageContent() {
           title: title,
           dataIndex: gameAttrb[index],
           key: gameAttrb[index],
-          render: (img_url) => (
-            <Image style={{ width: "180px" }} alt="cover-img" src={img_url} />
-          ),
+          sorter: sorter[title],
+          render: (img_url) => ({
+            props: {
+              style: { backgroundColor: "#2e2e2e" },
+            },
+
+            children: (
+              <Image alt="cover-img" src={img_url} style={{ width: 180 }} />
+            ),
+          }),
         };
       }
       if (title === "Action") {
@@ -90,21 +103,27 @@ function PageContent() {
           title: title,
           dataIndex: gameAttrb[index],
           key: gameAttrb[index],
+          sorter: sorter[title],
           render: (action, record) => {
-            return (
-              <Row>
-                <Col>
-                  <Button onClick={() => handleEdit(record.id)}>
-                    {action[0]}
-                  </Button>
-                </Col>
-                <Col>
-                  <Button onClick={() => handleDelete(record.id)}>
-                    {action[1]}
-                  </Button>
-                </Col>
-              </Row>
-            );
+            return {
+              props: {
+                style: { backgroundColor: "#2e2e2e" },
+              },
+              children: (
+                <Row>
+                  <Col>
+                    <Button onClick={() => handleEdit(record.id)}>
+                      {action[0]}
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button onClick={() => handleDelete(record.id)}>
+                      {action[1]}
+                    </Button>
+                  </Col>
+                </Row>
+              ),
+            };
           },
         };
       }
@@ -112,6 +131,15 @@ function PageContent() {
         title: title,
         dataIndex: gameAttrb[index],
         key: gameAttrb[index],
+        sorter: sorter[title],
+        render: (atr) => {
+          return {
+            props: {
+              style: { backgroundColor: "#2e2e2e" },
+            },
+            children: <p style={{ color: "#aeaeae" }}>{atr}</p>,
+          };
+        },
         onCell: (record) => {
           return {
             onClick: (event) => history.push(`/games/detail/${record.id}`),
@@ -140,39 +168,62 @@ function PageContent() {
   };
 
   const handleFilter = (config) => {
-    console.log(config);
-    let filteredGames = gameList
-      .filter((game) => {
-        if (!config.release_sign || !config.release) return true;
-        return filterSwitch(
-          config.release_sign,
-          game.release,
-          config.release.toString()
-        );
-      })
-      .filter((game) => {
-        if (config.singlePlayer === undefined || config.singlePlayer === "?")
-          return true;
-        return game.singlePlayer === config.singlePlayer;
-      })
-      .filter((game) => {
-        if (config.multiplayer === undefined || config.multiplayer === "?")
-          return true;
-        return game.multiplayer === config.multiplayer;
-      });
-    setGames(filteredGames);
+    setFilterStatus(true);
+    setFilterConfig(config);
   };
 
   const resetFilter = () => {
-    setGames(gameList);
+    setFilterStatus(false);
   };
 
   const handleSearch = (input) => {
-    let filteredGames = gameList.filter((game) =>
-      game.name.toLowerCase().includes(input.toLowerCase())
-    );
-    setGames(filteredGames);
+    setSearchStatus(true);
+    setSearchInput(input);
   };
+
+  useEffect(() => {
+    const filter = (config, _games) => {
+      let filteredGames = _games
+        .filter((game) => {
+          if (!config.release_sign || !config.release) return true;
+          return filterSwitch(
+            config.release_sign,
+            game.release,
+            config.release.toString()
+          );
+        })
+        .filter((game) => {
+          if (config.singlePlayer === undefined || config.singlePlayer === "?")
+            return true;
+          return game.singlePlayer === config.singlePlayer;
+        })
+        .filter((game) => {
+          if (config.multiplayer === undefined || config.multiplayer === "?")
+            return true;
+          return game.multiplayer === config.multiplayer;
+        });
+      return filteredGames;
+    };
+
+    const search = (input, _games) => {
+      let filteredGames = [];
+      filteredGames = _games.filter((game) =>
+        game.name.toLowerCase().includes(input.toLowerCase())
+      );
+      return filteredGames;
+    };
+
+    if (gameList) {
+      let newGamesList = gameList;
+      if (filterStatus) {
+        newGamesList = filter(filterConfig, newGamesList);
+      }
+      if (searchStatus) {
+        newGamesList = search(searchInput, newGamesList);
+      }
+      setGames(newGamesList);
+    }
+  }, [gameList, filterConfig, filterStatus, searchInput, searchStatus]);
 
   return (
     <Row gutter={[12, 12]} justify="space-between">

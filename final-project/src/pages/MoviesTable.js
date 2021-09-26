@@ -20,10 +20,10 @@ function PageContent() {
   const history = useHistory();
   let { movieList, fetchData } = useContext(MovieContext);
   let [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    if (movieList) setMovies(movieList);
-  }, [movieList]);
+  let [filterStatus, setFilterStatus] = useState(false);
+  let [filterConfig, setFilterConfig] = useState({});
+  let [searchStatus, setSearchStatus] = useState(false);
+  let [searchInput, setSearchInput] = useState();
 
   const movieAttrb = [
     "number",
@@ -176,36 +176,60 @@ function PageContent() {
   };
 
   const handleFilter = (config) => {
-    let filteredMovies = movieList
-      .filter((movie) => {
-        if (!config.year_sign || !config.year) return true;
-        return filterSwitch(config.year_sign, movie.year, config.year);
-      })
-      .filter((movie) => {
-        if (!config.duration_sign || !config.duration) return true;
-        return filterSwitch(
-          config.duration_sign,
-          movie.duration,
-          config.duration
-        );
-      })
-      .filter((movie) => {
-        if (!config.rating_sign || !config.rating) return true;
-        return filterSwitch(config.rating_sign, movie.rating, config.rating);
-      });
-    setMovies(filteredMovies);
+    setFilterStatus(true);
+    setFilterConfig(config);
   };
 
   const resetFilter = () => {
-    setMovies(movieList);
+    setFilterStatus(false);
   };
 
   const handleSearch = (input) => {
-    let filteredMovies = movieList.filter((movie) =>
-      movie.title.toLowerCase().includes(input.toLowerCase())
-    );
-    setMovies(filteredMovies);
+    setSearchStatus(true);
+    setSearchInput(input);
   };
+
+  useEffect(() => {
+    const filter = (config, _movies) => {
+      let filteredMovies = _movies
+        .filter((movie) => {
+          if (!config.year_sign || !config.year) return true;
+          return filterSwitch(config.year_sign, movie.year, config.year);
+        })
+        .filter((movie) => {
+          if (!config.duration_sign || !config.duration) return true;
+          return filterSwitch(
+            config.duration_sign,
+            movie.duration,
+            config.duration
+          );
+        })
+        .filter((movie) => {
+          if (!config.rating_sign || !config.rating) return true;
+          return filterSwitch(config.rating_sign, movie.rating, config.rating);
+        });
+      return filteredMovies;
+    };
+
+    const search = (input, _movies) => {
+      let filteredMovies = [];
+      filteredMovies = _movies.filter((movie) =>
+        movie.title.toLowerCase().includes(input.toLowerCase())
+      );
+      return filteredMovies;
+    };
+
+    if (movieList) {
+      let newMoviesList = movieList;
+      if (filterStatus) {
+        newMoviesList = filter(filterConfig, newMoviesList);
+      }
+      if (searchStatus) {
+        newMoviesList = search(searchInput, newMoviesList);
+      }
+      setMovies(newMoviesList);
+    }
+  }, [movieList, filterConfig, filterStatus, searchInput, searchStatus]);
 
   return (
     <Row gutter={[12, 12]} justify="space-between">
